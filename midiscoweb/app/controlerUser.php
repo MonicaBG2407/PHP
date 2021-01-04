@@ -20,7 +20,6 @@ function  ctlUserInicio(){
             if ( modeloOkUser($user,$clave)){
                 $_SESSION['user'] = $user;
                 $_SESSION['tipouser'] = modeloObtenerTipo($user);
-                echo  $_SESSION['tipouser'];
                 if ( $_SESSION['tipouser'] == "3"){
                     $_SESSION['modo'] = GESTIONUSUARIOS;
                     header('Location:index.php?orden=VerUsuarios');
@@ -77,6 +76,8 @@ function ctlUserDetalles() {
 }
 
 function ctlUserModificar() {
+    $msg="";
+    $error=false;
     if(isset($_GET['id'])){
     $idUsuario=$_GET['id']; 
     $nombre=$_SESSION['tusuarios'][$idUsuario][1];
@@ -87,36 +88,40 @@ function ctlUserModificar() {
     }
     if(isset($_POST['cancelar'])){
         header("Location: index.php?orden=VerUsuarios");
-    }
-    if (isset($_POST['modificar'])){
+    }else if(isset($_POST['modificar'])){
         $idUsuario=$_POST['id'];
         $contra=$_POST['clave'];
         $correo=$_POST['correo'];
+        $plan=$_POST['plan'];
+        $estado=$_POST['estado'];
         
         $_SESSION['tusuarios'][$_POST['id']][1]=$_POST['nombre'];
         $_SESSION['tusuarios'][$_POST['id']][3]=$_POST['plan'];
         $_SESSION['tusuarios'][$_POST['id']][4]=$_POST['estado'];
         
-        if (!validarcontra($contra)){
+        if(!validarContra($contra)){
             $msg="La contraseña tiene que tener entre 8-15 caracteres.";
             $error=true;
+            
         }else {
             $_SESSION['tusuarios'][$_POST['id']][0]=$_POST['clave'];
         }
-        
         if($_SESSION['tusuarios'][ $_POST['id']][2]!=$correo){
-            if(!validarCorreo($correo, $idUsuario)){
+            if(!validarCorreo($correo,$idUsuario)){
                 $msg="El correo está repetido o no es válido.";
                 $error=true;
-            }else{
+                
+            }else {
                 $_SESSION['tusuarios'][$_POST['id']][2]=$_POST['correo'];
-            }        
+                
+                
+            }
         }
-        header("Location: index.php?orden=VerUsuarios");
+        if(!$error){
+            header("Refresh:0; url=index.php?orden=VerUsuarios");
+        }
     }
-    
-    
-    include_once 'plantilla/modificarUser.php';
+   include_once 'plantilla/modificarUser.php';
     
 }
 
