@@ -98,7 +98,7 @@ function existe($idUsuario){
             return true;
         }
     }
-    echo '5';
+    
     return false;
 }
 
@@ -111,7 +111,7 @@ function validarContra($contra){
 
 function validarCorreo($correo,$idUsuario){
     if(!existeCorreo($correo)){
-        echo '1';
+        
             if(filter_var($correo, FILTER_VALIDATE_EMAIL)==true){
                 return true;
             }
@@ -126,7 +126,7 @@ function existeCorreo($correo){
             return true;
         }
     }
-    echo '5';
+    
     return false;
 }
 
