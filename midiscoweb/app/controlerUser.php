@@ -1,6 +1,6 @@
 <?php
 // ------------------------------------------------
-// Controlador que realiza la gestión de usuarios
+// Controlador que realiza la gestiÃ³n de usuarios
 // ------------------------------------------------
 include_once 'config.php';
 include_once 'modeloUser.php';
@@ -27,14 +27,14 @@ function  ctlUserInicio(){
                 }
                 else {
                   // Usuario normal;
-                  // PRIMERA VERSIÓN SOLO USUARIOS ADMISTRADORES
+                  // PRIMERA VERSIÃ“N SOLO USUARIOS ADMISTRADORES
                   $msg="Error: Acceso solo permitido a usuarios Administradores.";
                   // $_SESSION['modo'] = GESTIONFICHEROS;
                   // Cambio de modo y redireccion a verficheros
                 }
             }
             else {
-                $msg="Error: usuario y contraseña no válidos.";
+                $msg="Error: usuario y contraseÃ±a no vÃ¡lidos.";
            }  
         }
     }
@@ -98,7 +98,7 @@ function ctlUserModificar() {
         $_SESSION['tusuarios'][$_POST['id']][4]=$_POST['estado'];
         
         if (!validarcontra($contra)){
-            $msg="La contrase�a tiene que tener entre 8-15 caracteres.";
+            $msg="La contraseña tiene que tener entre 8-15 caracteres.";
             $error=true;
         }else {
             $_SESSION['tusuarios'][$_POST['id']][0]=$_POST['clave'];
@@ -106,7 +106,7 @@ function ctlUserModificar() {
         
         if($_SESSION['tusuarios'][ $_POST['id']][2]!=$correo){
             if(!validarCorreo($correo, $idUsuario)){
-                $msg="El correo est� repetido o no es v�lido.";
+                $msg="El correo está repetido o no es válido.";
                 $error=true;
             }else{
                 $_SESSION['tusuarios'][$_POST['id']][2]=$_POST['correo'];
@@ -126,7 +126,7 @@ function ctlUserBorrar() {
     
 }
 
-// Cierra la sesión y vuelva los datos
+// Cierra la sesiÃ³n y vuelva los datos
 function ctlUserCerrar(){
     session_destroy();
     modeloUserSave();
@@ -159,17 +159,17 @@ function altaRegistrar($msg, $error){
     $idUsuario=$_POST['id'];
     $contra=$_POST['clave'];
     $correo=$_POST['correo'];
-    var_dump($_POST);
+    
     if(!validarId($idUsuario)){
         $msg="El usuario esta repetido o debe contener entre 5-10 caracteres alfanumericos.";
         $error=true;
     }
     if(!validarcontra($contra)){
-        $msg="La contrase�a tiene que tener entre 8-15 caracteres.";
+        $msg="La contraseña tiene que tener entre 8-15 caracteres.";
         $error=true;
     }
     if(!validarCorreo($correo, $idUsuario)){
-        $msg="El correo ya existe o no es v�lido.";
+        $msg="El correo ya existe o no es válido.";
         $error=true;
     }
     if(!$error){
