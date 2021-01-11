@@ -1,6 +1,6 @@
 <?php
 // ------------------------------------------------
-// Controlador que realiza la gestión de usuarios
+// Controlador que realiza la gestiÃ³n de usuarios
 // ------------------------------------------------
 include_once 'config.php';
 include_once 'AccesoDatos.php';
@@ -26,14 +26,14 @@ function  ctlUserInicio(){
                 }
                 else {
                   // Usuario normal;
-                  // PRIMERA VERSIÓN SOLO USUARIOS ADMISTRADORES
+                  // PRIMERA VERSIÃ“N SOLO USUARIOS ADMISTRADORES
                   $msg="Error: Acceso solo permitido a usuarios Administradores.";
                   // $_SESSION['modo'] = GESTIONFICHEROS;
                   // Cambio de modo y redireccion a verficheros
                 }
             }
             else {
-                $msg="Error: usuario y contraseña no válidos.";
+                $msg="Error: usuario y contraseÃ±a no vÃ¡lidos.";
            }  
         }
     }
@@ -96,7 +96,7 @@ function ctlUserModificar() {
         $user2->nombre  = $_POST['nombre'];
         
         if(!validarContra($_POST['clave'])){
-            $msg="La contrase�a tiene que tener entre 8-15 caracteres.";
+            $msg="La contraseña tiene que tener entre 8-15 caracteres.";
             $error=true;
             
         }else {
@@ -104,7 +104,7 @@ function ctlUserModificar() {
         }
         if($user->mail!=$_POST['correo']){
             if(!validarCorreo($_POST['correo'], $user->id)){
-                $msg="El correo est� repetido o no es v�lido.";
+                $msg="El correo está repetido o no es válido.";
                 $error=true;
             }else{
                 $user2->mail  = $_POST['correo'];
@@ -138,7 +138,7 @@ function ctlUserBorrar() {
     
 }
 
-// Cierra la sesión y vuelva los datos
+// Cierra la sesiÃ³n y vuelva los datos
 function ctlUserCerrar(){
     session_destroy();
     header('Location:index.php');
@@ -176,7 +176,6 @@ function altaRegistrar($msg, $error){
     $idUsuario=$_POST['id'];
     $contra=$_POST['clave'];
     $correo=$_POST['correo'];
-    var_dump($_POST);
     if(!validarId($idUsuario)){
         $msg="El usuario esta repetido o debe contener entre 5-10 caracteres alfanumericos.";
         $error=true;
@@ -184,13 +183,13 @@ function altaRegistrar($msg, $error){
         $user2->id  = $_POST['id'];   
     }
     if(!validarcontra($contra)){
-        $msg="La contrase�a tiene que tener entre 8-15 caracteres.";
+        $msg="La contraseña tiene que tener entre 8-15 caracteres.";
         $error=true;
     }else{
         $user2->pass  = $_POST['clave'];
     }
     if(!validarCorreo($correo, $idUsuario)){
-        $msg="El correo ya existe o no es v�lido.";
+        $msg="El correo ya existe o no es válido.";
         $error=true;
     }else{
         $user2->mail  = $_POST['correo'];
@@ -213,11 +212,11 @@ function user($idUsuario){
 }
 
 function limpiarEntrada(string $entrada):string{
-    $salida = trim($entrada); // Elimina espacios antes y despu�s de los datos
+    $salida = trim($entrada); // Elimina espacios antes y después de los datos
     $salida = strip_tags($salida); // Elimina marcas
     return $salida;
 }
-// Funci�n para limpiar todos elementos de un array
+// Función para limpiar todos elementos de un array
 function limpiarArrayEntrada(array &$entrada){
     
     foreach ($entrada as $key => $value ) {
